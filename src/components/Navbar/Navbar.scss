@@ -1,0 +1,67 @@
+$background: #FFBF00;
+$boxshadow: 0px 4px 5px -5px rgba(0,0,0,0.75);
+$nav-item-color: #374151;
+
+#navbar 
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    height: 78px;
+    background-color: $background;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: $boxshadow;
+    &>#left-nav
+    {
+        padding-left: 50px;
+        button
+        {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: none;
+            overflow: hidden;
+            background-color: $background;
+            box-shadow: $boxshadow;
+            div 
+            {
+                width: 100%;
+                height: 100%;
+                background-image: url(/images/logo.png);
+                background-position: center;
+                background-size: cover;
+                &:hover 
+                {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    &>#middle-nav, &>#right-nav
+    {
+        button {
+            height: 100%;
+            padding: 0 20px 0 20px;
+            border: none;
+            text-transform: uppercase;
+            background: transparent;
+            color: $nav-item-color;
+
+            font-weight: bold;
+
+            font-family: 'Dosis';
+            transition: background-color 0.2s ease;
+
+            &:hover 
+            {
+                background-color: #599857;
+                color: white;
+                cursor: pointer;
+            }
+        }
+    }
+}

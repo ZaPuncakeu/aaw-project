@@ -1,0 +1,120 @@
+#animal-info 
+{
+    width: 100%;
+    padding-top: 180px;
+    padding-bottom: 100px;
+
+    &>.info-animal-container
+    {
+        width: 95%;
+        margin: auto;
+        &>.animal-section-1
+        {
+            display: flex;
+            gap: 15px;
+
+            @media (max-width: 849px)
+            {
+                flex-wrap: wrap;
+                &>div:nth-child(1)
+                {
+                    width: 100%;
+                }
+            }
+
+            &>div:nth-child(1)
+            {
+                width: 600px;
+                height: 600px;
+                border-radius: 10px;
+                background-size: cover;
+                background-position: center;
+            }
+
+            &>div:nth-child(2)
+            {
+                &>h1 
+                {
+                    font-size: 3rem;
+                }
+
+                &>p 
+                {
+                    font-family: 'Dosis';
+                    font-size: 1.8rem;
+                    color: #374151;
+
+                    &>a {
+                        text-decoration: none;
+                        color: #FFBF00;
+                    }
+                }
+
+                &>hr 
+                {
+                    margin-top: 25px;
+                    margin-bottom: 25px;
+                }
+
+                &>div 
+                {
+                    display: flex;
+                    justify-content: center;
+
+                    &>div 
+                    {
+                        &:nth-child(1)
+                        {
+                            padding-right: 20px;
+                        }
+
+                        &:nth-child(2)
+                        {
+                            padding-left: 20px;
+                            padding-right: 20px;
+                            border-left: solid #374151 2px;
+                            border-right: solid #374151 2px;
+                        }
+
+                        &:nth-child(3)
+                        {
+                            padding-left: 20px;
+                        }
+
+                        &>h2 
+                        {
+                            text-transform: uppercase;
+                        }
+
+                        &>span 
+                        {
+                            font-size: 2.5rem;
+                            font-family: 'Dosis';
+                            color: #599857;
+                        }
+                    }
+                }
+            }
+        }
+
+        &>div 
+        {
+            &>h2 
+            {
+                font-size: 2rem;
+                text-transform: uppercase;
+            }
+
+            &>p 
+            {
+                font-family: 'Dosis';
+                text-align: justify;
+            }
+
+            &>.animal-description
+            {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}

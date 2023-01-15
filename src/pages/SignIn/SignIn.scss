@@ -1,0 +1,33 @@
+#sign-in 
+{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &>form 
+    {
+        width: 500px;
+
+        @media (max-width: 700px) {
+            width: 80%;
+        }
+
+        &>h1
+        {
+            font-family: 'Dosis';
+            text-transform: uppercase;
+        }
+
+        &>.input-auth 
+        {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        &>.btn-auth
+        {
+            margin-top: 15px;
+        }
+    }
+}

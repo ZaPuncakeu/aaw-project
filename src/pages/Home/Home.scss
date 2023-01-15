@@ -1,0 +1,169 @@
+#home 
+{
+    &>.container 
+    {
+        width: 100vw;
+        height: 100vh;
+        background-image: url(/images/home/animal.jpg);
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        background-attachment: fixed;
+
+        &>div 
+        {
+            font-family: 'Dosis';
+            width: 90%;
+            margin: auto;
+            color: rgb(255, 255, 255);
+            text-transform: uppercase;
+            h1 {
+                font-size: 3rem;
+                text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+                span {
+                    font-family: 'Pacifico';
+                    text-transform: none;
+                    color: #FFBF00;
+                }
+            }
+
+            h2 {
+                text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+            }
+
+            .main-btn {
+                margin-top: 15px;
+                border: solid #FFBF00 2px;
+                width: 250px;
+                text-align: center;
+                &:hover {
+                    cursor: pointer;
+                    &>div {
+                        width: 100%;
+                        &>p {
+                            color: #374151;
+                        }
+                    }
+                }
+
+                &>div 
+                {
+                    width: 0;
+                    height: 100%;
+                    background-color: #FFBF00;
+                    transition: width 0.2s ease, color 0.2s ease;
+                    &>p {
+                        width: 250px;
+                        text-align: center;
+                        white-space: nowrap;
+                        padding: 15px 0 15px 0;
+                        color: rgb(255, 255, 255);
+                    }
+                }
+            }
+
+        }
+    }
+
+    &>.home-section 
+    {
+        width: 95%;
+        margin: 35px auto;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:nth-child(2)
+        {
+            flex-wrap: wrap;
+        }
+
+        &:nth-child(3)
+        {
+            flex-wrap: wrap-reverse;
+            
+            @media (max-width: 900px)
+            {
+                padding-top: 25px;
+            }
+        }
+
+        &>.image-container 
+        {
+            width: 40%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+
+            border-radius: 80px;
+            display: flex;
+            &:nth-child(1)
+            {
+                background-image: url(/images/home/feeding.jpg);
+                justify-content: flex-start;
+
+                &>div
+                {
+                    position: relative;
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                    background-color: #FFBF00;
+                    z-index: 1;
+                    top: -80px;
+                    left: -80px;
+                }
+            }
+
+            &:nth-child(2)
+            {
+                justify-content: flex-end;
+                background-image: url(/images/home/endangered.jpg);
+
+                &>div
+                {
+                    position: relative;
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                    background-color: #125d41;
+                    z-index: 1;
+                    top: -80px;
+                    right: -80px;
+                }
+            }
+
+            @media (max-width: 900px)
+            {
+                width: 100%;
+            }
+        }
+
+        &>.info-zoo
+        {
+            width: 50%;
+            padding: 0px 5px 0px 5px;
+            text-align: center;
+
+            @media (max-width: 900px)
+            {
+                width: 100%;
+            }
+
+            &>h1 
+            {
+                font-size: 3rem;
+            }
+
+            &>p 
+            {
+                padding-left: 15px;
+                padding-right: 15px;
+                font-family: 'Dosis';
+                font-size: 1.8rem;
+                text-align: justify;
+            }
+        }
+    }
+}
