@@ -21,3 +21,8 @@ body
 {
   overflow-x: hidden;
 }
+
+.admin-page 
+{
+  padding-top: 100px;
+}

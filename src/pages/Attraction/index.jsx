@@ -10,7 +10,7 @@ export default function Attraction()
     console.log(attraction);
     return(
         <div id="attraction-info" style={{
-            [loading ? 'height' : 'min-height']: '100vh'
+            [loading ? 'height' : 'minHeight']: '100vh'
         }}>
             {
                 loading ? 

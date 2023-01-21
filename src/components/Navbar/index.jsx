@@ -54,7 +54,7 @@ export default function Navbar({
 
             <div id="right-nav">
                 {
-                    rightNav[user ? "authenticated" : "unauthenticated"].map((nav, index) => {
+                    rightNav[user ? user : "unauthenticated"].map((nav, index) => {
                         return(
                             <Link to={nav.link} key={`right-nav-${index}`}>
                                 <button>

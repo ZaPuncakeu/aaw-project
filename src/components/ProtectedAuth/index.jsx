@@ -11,5 +11,5 @@ export function ProtectedUnAuth({user, children})
 {
     const navigate = useNavigate();
     if(!user) return children
-    navigate('/profile');
+    navigate(user === 'admin' ? '/admin/animals' : '/favourites');
 }

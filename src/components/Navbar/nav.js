@@ -10,15 +10,10 @@ export const middleNav = [
         link: "species"
     },
     {
-        icon: "gamepad",
-        title: "Attractions & activities",
-        link: "activities",
-    }/*,
-    {
-        icon: "shield",
-        title: "Animals protection",
-        link: "protection"
-    }*/
+        icon: "search",
+        title: "Search for an animal",
+        link: "search"
+    }
 ]
 
 export const rightNav = {
@@ -41,11 +36,6 @@ export const rightNav = {
             link: 'favourites'
         },
         {
-            icon: "user",
-            title: "Profile",
-            link: 'profile'
-        },
-        {
             icon: "power-off",
             link: 'logout'
         }
@@ -54,7 +44,7 @@ export const rightNav = {
         {
             icon: "user-with-cog",
             title: "Admin",
-            link: 'admin'
+            link: 'admin/animals'
         },
         {
             icon: "power-off",

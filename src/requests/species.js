@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import axios from 'redaxios'
 export const getSpiecies = () => 
 {
     const [loading, setLoading] = useState(true);
@@ -10,129 +10,20 @@ export const getSpiecies = () =>
         (async () => {
             try
             {
-                setTimeout(() => {
-                    setSpecies(species_db);
-                    setLoading(false);
-                }, 2000);
+                const res = await axios.get('http://localhost:3001/species', {withCredentials: true})
+                setSpecies(res.data.map(s => ({...s, link: `${s.slug}`, image: `http://localhost:3001/animals/${s.image}`})));
+                setLoading(false);
             }catch(err)
             {
+                setLoading(false);
                 setError(err);
             }
         })();
     }, [])
 
     return [
-        species.map(a => ({...a, link: `/species/${a.type}`, text: `${a.count} animals available`})), 
+        species, 
         loading,
         error
     ];
 }
-
-export const getEndangeredSpiecies = () => 
-{
-    const [loading, setLoading] = useState(true);
-    const [species, setSpecies] = useState([]);
-    const [error, setError] = useState(null);
-    useEffect(() => 
-    {
-        (async () => {
-            try
-            {
-                setTimeout(() => {
-                    setSpecies(species_db);
-                    setLoading(false);
-                }, 2000);
-            }catch(err)
-            {
-                setError(err);
-            }
-        })();
-    }, [])
-
-    return [
-        species.map(a => ({...a, link: `/species/${a.type}`, text: `${a.count} animals available`})), 
-        loading,
-        error
-    ];
-}
-
-const species_db = [{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-},
-{
-    "image": '/images/home/animal.jpg',
-    "title": 'Dogs',
-    "type": 'dogs',
-    'count': 10
-}]
-
-

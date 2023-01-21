@@ -9,7 +9,7 @@ export default function Species()
 
     return(
         <div id="species" style={{
-            [loading ? 'height' : 'min-height']: '100vh'
+            [loading ? 'height' : 'minHeight']: '100vh'
         }}>
             {
                 loading ?

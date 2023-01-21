@@ -8,7 +8,7 @@ export default function Attractions()
     const [attractions, loading, error] = getAttractions();
     return(
         <div id="attractions" style={{
-            [loading ? 'height' : 'min-height']: '100vh'
+            [loading ? 'height' : 'minHeight']: '100vh'
         }}>
             {
                 loading ?

@@ -1,16 +1,18 @@
 import './InfoList.scss';
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function InfoList({
     id,
     title,
     description,
     data,
-    details_interface
+    details_interface,
+    addToFavourite
 })
 {
-    console.log(data);
+    const type = useSelector(state => state.user.token)
     return(
         <motion.div 
             id={id} 
@@ -38,12 +40,27 @@ export default function InfoList({
                                 <div>
                                     <h2>{e.name}</h2>
                                     <div></div>
-                                    <p>{e.text.substring(0, 448)}...</p>
+                                    <p>{e.description.substring(0, 448)}...</p>
                                     <Link to={e.link}>
                                         <button>Click to know more...</button>
                                     </Link>
                                 </div>
-                                <div style={{backgroundImage: `url(${e.image})`}} className='image'></div>
+                                <div style={{backgroundImage: `url(${e.image})`}} className='image'>
+                                    {
+                                        type === 'user' ? 
+                                        <span 
+                                            className='fa fa-heart'
+                                            style={{
+                                                color: e.liked ? 'red' : 'white',
+                                                fontSize: '3rem',
+                                                cursor: 'pointer'
+                                            }}
+                                            onClick={evt => addToFavourite(e.id_animal, e.slug)}
+                                        ></span>
+                                        :
+                                        null
+                                    }
+                                </div>
                             </div>
                         )
                     })

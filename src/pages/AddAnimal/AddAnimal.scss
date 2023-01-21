@@ -1,0 +1,45 @@
+#add-animal
+{
+    &>h1
+    {
+        text-align: center;
+        font-size: 3rem;
+        @media (max-width: 800px) {
+            margin-top: 55px;
+        }
+    }
+
+    &>.admin-animals-grid {
+        width: 90%;
+        margin: auto;
+    }
+
+    & .add-animal 
+    {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        &>a {
+            text-decoration: none;
+        }
+    }
+
+    &>form
+    {
+        &>div 
+        {
+            padding-top: 20px;
+            width: 60%;
+
+            @media (max-width: 800px) {
+                width: 90%;
+            }
+            margin: auto;
+            &>.input-animal 
+            {
+                width: 100%;
+            }
+        }
+    }
+}

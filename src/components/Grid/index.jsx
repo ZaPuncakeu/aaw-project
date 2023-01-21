@@ -1,10 +1,15 @@
 import Card from "../Card"
+import EditableCard from "../EditableCard";
 import RoundedCard from "../RoundedCard"
 import './Grid.scss'
 export default function Grid({
     data,
     id,
-    style='normal'
+    style='normal',
+    editable=false,
+    imageKey= 'image',
+    deleteAction,
+    titleKey='title'
 }){
     console.log(data);
     return(
@@ -15,8 +20,19 @@ export default function Grid({
                         <div key={id+"-"+i} className={style}>
                             {
                                 style !== 'rounded' ?
+                                    editable ?
+                                    <EditableCard
+                                        title={e[titleKey]}
+                                        image={e[imageKey]}
+                                        key={id+'-card-'+i}
+                                        imageKey={imageKey}
+                                        deleteAction={deleteAction}
+                                        index={i}
+                                        slug={e.slug ? e.slug : e.species_slug}
+                                    />
+                                    : 
                                     <Card
-                                        title={e.title}
+                                        title={e[titleKey]}
                                         image={e.image}
                                         count={e.count}
                                         link={e.link}

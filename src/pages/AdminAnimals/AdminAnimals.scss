@@ -1,0 +1,24 @@
+#admin-animals
+{
+    &>h1
+    {
+        text-align: center;
+        font-size: 3rem;
+    }
+
+    &>.admin-animals-grid {
+        width: 90%;
+        margin: auto;
+    }
+
+    & .add-animal 
+    {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        &>a {
+            text-decoration: none;
+        }
+    }
+}

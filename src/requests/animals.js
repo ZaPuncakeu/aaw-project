@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import axios from 'redaxios'
+
 export const getAnimalsOfSpecie = (specie) => 
 {
     console.log("getAnimalsOfSpecie "+specie);
@@ -7,16 +9,39 @@ export const getAnimalsOfSpecie = (specie) =>
     const [animals, setAnimals] = useState([]);
     const [error, setError] = useState(null);
     const [title, setTitle] = useState(null);
+
+    async function addToFavourite(id, slug)
+    {
+        try {
+            const res = await axios.post(`http://localhost:3001/animal/favourite`, {id_animal: id, slug}, {withCredentials: true})
+            setAnimals(animals.map(d => {
+                return (
+                    d.id_animal === id ?
+                    ({...d, liked: !d.liked})
+                    :
+                    ({...d})
+                )
+            }));
+        }catch(err)
+        {
+            alert("An error occured...");
+            console.log(err);
+        }
+    }
+
     useEffect(() => 
     {
         (async () => {
             try
             {
-                setTimeout(() => {
-                    setAnimals(animals_db.db);
-                    setTitle(animals_db.title);
-                    setLoading(false);
-                }, 2000);
+                const res = await axios.get(`http://localhost:3001/species/${specie}`, {withCredentials: true})
+                
+                let animal = res.data.map(a => ({...a, image: 'http://localhost:3001/animals/'+JSON.parse(a.photos)[0]}))
+                
+                setLoading(false);
+                console.log(animal)
+                setAnimals(animal);
+                setTitle(res.data[0].title)
             }catch(err)
             {
                 setError(err);
@@ -28,7 +53,8 @@ export const getAnimalsOfSpecie = (specie) =>
         animals.map(a => ({...a, "link": `/animal/${a.slug}`})), 
         loading, 
         error,
-        title
+        title,
+        addToFavourite
     ];
 }
 
@@ -38,15 +64,61 @@ export const getAnimalBySlug = (slug) =>
     const [loading, setLoading] = useState(true);
     const [animal, setAnimal] = useState({});
     const [error, setError] = useState(null)
+
+    async function editAnimal(data)
+    {
+        try {
+            const res = await axios.post(`http://localhost:3001/animal/edit`, data, {withCredentials: true})
+            setAnimal({
+                ...animal,
+                liked: !animal.liked
+            });
+        }catch(err)
+        {
+            alert("An error occured...");
+            console.log(err);
+        }
+    }
+
+    async function addToFavourite(id, slug)
+    {
+        try {
+            const res = await axios.post(`http://localhost:3001/animal/favourite`, {id_animal: id, slug}, {withCredentials: true})
+            setAnimal({
+                ...animal,
+                liked: !animal.liked
+            });
+        }catch(err)
+        {
+            alert("An error occured...");
+            console.log(err);
+        }
+    }
+    
     useEffect(() => 
     {
+        console.log(setLoading);
+        //setLoading(true)
         (async () => {
             try
             {
-                setTimeout(() => {
-                    setAnimal(animal_info);
-                    setLoading(false);
-                }, 2000);
+                const res = await axios.get(`http://localhost:3001/animal/${slug}`, {withCredentials: true});
+                let animal_db = res.data.map(an => {
+                    return {
+                        ...an,
+                        'photos': [...JSON.parse(an['photos']).map(p => `http://localhost:3001/animals/${p}`)],
+                        'weight': [...JSON.parse(an['weight']).split(',')],
+                        'length': [...JSON.parse(an['length']).split(',')],
+                        'continent': [...JSON.parse(an['continent']).split(',')],
+                        'countries': [...JSON.parse(an['countries']).split(',')],
+                        'aliases': [...JSON.parse(an['aliases']).split(',')],
+                        'position': [...JSON.parse(an['position']).split(',')]
+                    }
+                })[0]
+
+                console.log(animal_db)
+                setAnimal(animal_db);
+                setLoading(false);
             }catch(err)
             {
                 setError(err);
@@ -57,74 +129,121 @@ export const getAnimalBySlug = (slug) =>
     return [
         animal, 
         loading, 
-        error
+        error,
+        addToFavourite,
+        editAnimal
     ];
 }
 
-const animals_db = {
-    'title': "Dogs",
-    db: [{
-        "name": "NORTHERN CARDINAL",
-        "image": "/images/home/animal.jpg",
-        "text": "Male Northern cardinals are unmistakable in their vibrant red plumage. Females of this species are not so bright but are also attractive being reddish olive in color. These birds have distinctive crests on their heads and masks on their faces which are black in the males and gray in the females. Did you know that the plumage color of the males is produced from carotenoid pigments in the diet? Coloration is produced from both red pigments and",
-        "slug": "northern-cardinal"
-    },
+export const getAllAnimals = () => 
+{
+    const [loading, setLoading] = useState(false);
+    const [animals, setAnimals] = useState([]);
+    const [error, setError] = useState(null)
+    
+    async function addToFavourite(id, slug)
     {
-        "name": "NORTHERN CARDINAL",
-        "image": "/images/home/animal.jpg",
-        "text": "Male Northern cardinals are unmistakable in their vibrant red plumage."
-    },
-    {
-        "name": "NORTHERN CARDINAL",
-        "image": "/images/home/animal.jpg",
-        "text": "Male Northern cardinals are unmistakable in their vibrant red plumage. Females of this species are not so bright but are also attractive being reddish olive in color. These birds have distinctive crests on their heads and masks on their faces which are black in the males and gray in the females. Did you know that the plumage color of the males is produced from carotenoid pigments in the diet? Coloration is produced from both red pigments and  being reddish olive in color. These birds have distinctive crests on their heads and masks on their faces which are black in the males and gray in the females. Did you know that the plumage color of the males is produced from carotenoid pigments in the diet? Coloration is produced from both red pigments and  being reddish olive in color. These birds have distinctive crests on their heads and masks on their faces which are black in the males and gray in the females. Did you know that the plumage color of the males is produced from carotenoid pigments in the diet? Coloration is produced from both red pigments and",
-        "slug": "northern-cardinal"
-    },
-    {
-        "name": "NORTHERN CARDINAL",
-        "image": "/images/home/animal.jpg",
-        "text": "Male Northern cardinals are unmistakable in their vibrant red plumage. Females of this species are not so bright but are also attractive being reddish olive in color. These birds have distinctive crests on their heads and masks on their faces which are black in the males and gray in the females. Did you know that the plumage color of the males is produced from carotenoid pigments in the diet? Coloration is produced from both red pigments and",
-        "slug": "northern-cardinal"
-    }]
-}
+        try {
+            const res = await axios.post(`http://localhost:3001/animal/favourite`, {id_animal: id, slug}, {withCredentials: true})
+            setAnimals(animals.map(d => {
+                return (
+                    d.id_animal === id ?
+                    ({...d, liked: !d.liked})
+                    :
+                    ({...d})
+                )
+            }));
+        }catch(err)
+        {
+            alert("An error occured...");
+            console.log(err);
+        }
+    }
 
-const animal_info = {
-    "name": "NORTHERN CARDINAL",
-    "photos": [
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg',
-        '/images/home/animal.jpg'
-    ],
-    "aliases": [
-        "Bruh",
-        "Moment",
-        "Shkoupi"
-    ],
-    "continent": ["North America"],
-    "countries": [
-        "Central America",
-        "Caribbean Islands"
-    ],
-    "description": "The Northern cardinal is a medium-sized very popular songbird of North America. Seven eastern states have it as their official state bird. The male is perhaps most responsible for their popularity, being the perfect combination of conspicuousness, familiarity, and style, featuring a very appealing shade of red. The brown females even have a sharp crest and red accents. These birds do not migrate and they do not molt to a dull plumage, so in the winter snow, they still look stunning. In summer, one of the earliest sounds in the morning is their sweet whistling.",
-    "origin_description": "Northern cardinals are common throughout central and eastern North America, and south from Florida and Mexico down to Belize and Guatemala. This species has also been introduced to Bermuda, California, and Hawaii. They inhabit woodland edges, streamside thickets, wetlands, shrublands, gardens, and vegetation near houses in suburban and urban areas.",
-    "lifestyle": `This species is not migratory but is a year-round resident within its range. During the day, these birds are active, especially in the morning and evening. In winter they feed in large flocks of as many as 60 to 70, mainly in open thickets on the ground, but they also forage in bushes and trees. In winter, most will roost and flock together. Males are very territorial and will defend their territory from other males. If they see their own reflection, they may attempt to fight this intruder. These birds primarily use physical displays and vocalizations to communicate. Both male and female cardinals sing, with beautiful, loud whistled phrases, sounding like "whacheer whacheer" and "whoit whoit whoit". They sing for courtship and to defend territories. "Chips" is their contact call or alarm. They also use many visual displays for signaling alarm, including "tail-flicks" and lifting and lowering their crest.`,
-    "nutrition": `Northern cardinals are herbivores (granivores); they eat the seeds of grasses and corn, fruit (grapes and berries), buds, sunflower seeds, and insects. Sometimes they will drink maple sap out of sapsucker holes.`,
-    "diet": ["Herbivore", "Granivore"],
-    "species": "Cardinalis cardinalis",
-    "species_slug": "cardinalis-cardinalis",
-    "life_span": 15,
-    "weight": [33.6, 33.65],
-    "length": [21, 23.5]
+
+    async function deleteAnimal(slug)
+    {
+        setLoading(true);
+        try{
+            const res = await axios.delete('http://localhost:3001/animal/'+slug, {withCredentials: true});
+            setLoading(false);
+        }catch(err)
+        {
+            setLoading(false);
+            console.log(err);
+        }
+    }
+
+    async function addAnimal(data)
+    {
+        setLoading(true);
+        try{
+            const res = await axios.post('http://localhost:3001/animals', data, {withCredentials: true});
+            setLoading(false);
+        }catch(err)
+        {
+            setLoading(false);
+            console.log(err);
+        }
+    }
+
+    async function getAnimals()
+    {
+        try
+        {
+            setLoading(true);
+            const animal = await axios.get('http://localhost:3001/animal', {withCredentials: true});
+            let animal_db = animal.data;
+            console.log(animal_db);
+            animal_db = animal_db.map(an => {
+                return {
+                    ...an,
+                    'photos': JSON.parse(an['photos']).map(p => `http://localhost:3001/animals/${p}`),
+                    'weight': JSON.parse(an['weight']).split(','),
+                    'length': JSON.parse(an['length']).split(','),
+                    'continent': JSON.parse(an['continent']).split(','),
+                    'countries': JSON.parse(an['countries']).split(','),
+                    'aliases': JSON.parse(an['aliases']).split(','),
+                    'position': JSON.parse(an['position']).split(',')
+                }
+            })
+
+            console.log(animal_db)
+            setAnimals(animal_db);
+            setLoading(false);
+        }catch(err)
+        {
+            setLoading(false);
+            setError(err);
+        }
+    }
+
+    async function getFavourites()
+    {
+        console.log("HERE");
+        try
+        {
+            setLoading(true);
+            const animal = await axios.get('http://localhost:3001/favourite', {withCredentials: true});
+            let animal_db = animal.data;
+            console.log(animal_db)
+            setAnimals(animal_db);
+            setLoading(false);
+        }catch(err)
+        {
+            console.log(err);
+            setLoading(false);
+            setError(err);
+        }
+    }
+    return {
+        animals, 
+        loading, 
+        addAnimal,
+        getAnimals,
+        error,
+        getFavourites,
+        addToFavourite,
+        deleteAnimal
+    };
 }
