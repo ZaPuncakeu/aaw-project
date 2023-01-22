@@ -31,4 +31,9 @@ Configurez le fichier `.env` avec les informations necessaires (**NE CHANGEZ PAS
 ### Lancement du projet ###
 Pour lancer le projet (client + serveur) 2 commandes sont disponibles :
 * Si il s'agit de votre premier lancement de l'appli, exécutez la commande : `yarn init-and-start` qui va initialiser la BDD + les tables.
-* Sinon exécutez la commande : `yarn start` si la BDD est déjà configurée.
+* Sinon exécutez la commande : `yarn start` si la BDD est déjà configurée (Attention, si vous exécutez `yarn init-and-start` dans ce cas, une erreur risque de se produire).
+
+### Accès admin ###
+Les accès admin sont par défaut : 
+* Email : `admin@test.com`
+* Mot de passe : `admin`
