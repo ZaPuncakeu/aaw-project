@@ -14,7 +14,9 @@ Afin de lancer le projet sans problème il faut d'abord avoir :
 * [Nodejs](https://nodejs.org/en/) v18.12.1 
 * [Postgresql](https://www.postgresql.org/download/) 15 + pgAdmin 4
 * [Vite](https://vitejs.dev)
+* [yarn](https://yarnpkg.com)
 
 ### Installation des dépendences ###
-Clonnez le projet avec : 
-`git clone https://github.com/ZaPuncakeu/zoo-management.git`
+Clonnez le projet avec : `git clone https://github.com/ZaPuncakeu/zoo-management.git`
+Puis déplacez vous dans à l'intérieur du projet : `cd zoo-management`
+Enfin installez les dépendances : `yarn install`
