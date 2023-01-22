@@ -17,6 +17,6 @@ Afin de lancer le projet sans problème il faut d'abord avoir :
 * [yarn](https://yarnpkg.com)
 
 ### Installation des dépendences ###
-Clonnez le projet avec : `git clone https://github.com/ZaPuncakeu/zoo-management.git`
-Puis déplacez vous dans à l'intérieur du projet : `cd zoo-management`
+Clonnez le projet avec : `git clone https://github.com/ZaPuncakeu/zoo-management.git` \\
+Puis déplacez vous dans à l'intérieur du projet : `cd zoo-management` \\
 Enfin installez les dépendances : `yarn install`
