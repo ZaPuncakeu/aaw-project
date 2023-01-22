@@ -48,8 +48,7 @@ async function editAnimal(db, data)
     return new Promise(async (resolve, reject) => {
         try{
             const animal = await getAnimalBySlug(db, slug);
-            console.log(animal)
-            if(animal.length > 0 && animal[0].id_animal !== data.id_animal)
+            if(animal.length > 0 && animal[0].id_animal != data.id_animal)
             {
                 return reject({
                     'status': 'failure',
@@ -176,17 +175,8 @@ function getAllAnimals(db, user_type, id)
 {
     return new Promise(async (resolve, reject) => {
         try{
-            let res;
-            if(user_type === 'admin')
-            {
-                res = await db.query('SELECT * FROM animals');
-            }
-            else 
-            {
-                console.log('here');
-                res = await db.query('SELECT animals.*, id_user FROM animals LEFT JOIN favourites ON animals.id_animal = favourites.id_animal WHERE favourites.id_user = $1', [id]);
-            }
-            console.log(res.rows);
+            const res = await db.query('SELECT * FROM animals');
+            console.log("rows : ", res.rows);
             resolve(res.rows);
         }catch(error) {
             reject(error);

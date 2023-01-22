@@ -5,6 +5,7 @@ import { Button, MenuItem, Select, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { getSpiecies } from '../../requests/species';
 import Map from '../../components/Map/Map';
+import { useNavigate } from 'react-router-dom';
 export default function AddAnimal()
 {
     const { addAnimal, loading:add_loading } = getAllAnimals();
@@ -17,6 +18,8 @@ export default function AddAnimal()
     const [species, loading, error] = getSpiecies();
     const [photos, setPhotos] = useState([]);
     const [position, setPosition] = useState([0,0]);
+
+    const navigate = useNavigate();
     
 
     function editWeight(e, index)
@@ -122,7 +125,10 @@ export default function AddAnimal()
                 
         }
 
-        addAnimal(formData);
+        addAnimal(formData, () =>
+        {
+            navigate('/admin/animals');
+        });
     }
 
     return(

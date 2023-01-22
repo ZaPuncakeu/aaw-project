@@ -32,7 +32,6 @@ function Description({
     addToFavourite
 })
 {
-    
     const type = useSelector(state => state.user.token)
     return(
         <motion.div 

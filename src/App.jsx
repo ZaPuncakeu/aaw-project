@@ -8,11 +8,9 @@ import {
 } from 'react-router-dom';
 import Home from "./pages/Home";
 import Species from "./pages/Species";
-import Attractions from "./pages/Attractions";
 import Animals from "./pages/Species/Animals";
 import Footer from "./components/Footer";
 import Animal from "./pages/Animal";
-import Attraction from "./pages/Attraction";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import { ProtectedUnAuth, ProtectedAuth } from "./components/ProtectedAuth";

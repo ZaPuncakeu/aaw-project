@@ -42,7 +42,6 @@ export const rightNav = {
     ],
     "admin": [
         {
-            icon: "user-with-cog",
             title: "Admin",
             link: 'admin/animals'
         },

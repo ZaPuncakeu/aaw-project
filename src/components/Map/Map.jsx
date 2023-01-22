@@ -85,7 +85,8 @@ export default function Map({
                         let x = e.clientX - bounds.x;
                         let y = e.clientY - bounds.y;
                         console.log(x,y);
-                        setMarker([x, y]);
+                        if(editable)
+                            setMarker([parseInt(x), parseInt(y)]);
                     }}
                     onMouseEnter={() => setMouseOver(true)}
                     onMouseLeave={() => setMouseOver(false)}
@@ -119,11 +120,13 @@ export default function Map({
                                             cursor: 'pointer',
                                             backgroundPosition: 'center',
                                             backgroundSize: 'cover',
-                                            border: 'solid black 3px',
+                                            border: 'solid rgb(10, 6, 255) 3px',
                                             position: 'relative',
                                             top: an['position'][1]+"px",
                                             left: an['position'][0]+"px"
-                                        }}>
+                                        }}
+                                        className='animal-preview'
+                                        >
                                         </div>
                                     </Link>
                                 })

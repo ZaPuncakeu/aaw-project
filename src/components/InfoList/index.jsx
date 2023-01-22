@@ -2,6 +2,7 @@ import './InfoList.scss';
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 export default function InfoList({
     id,
@@ -13,6 +14,7 @@ export default function InfoList({
 })
 {
     const type = useSelector(state => state.user.token)
+    const [search, setSearch] = useState('');
     return(
         <motion.div 
             id={id} 
@@ -30,11 +32,11 @@ export default function InfoList({
             <div className='search-form'>
                 <label htmlFor={'collection'+id}>Search within our collection</label>
                 <br/>
-                <input type="search" id={'collection-'+id} placeholder="Search within our collection"/>
+                <input type="search" id={'collection-'+id} placeholder="Search within our collection" onChange={e => setSearch(e.target.value)}/>
             </div>
             <div className="element-container">
                 {
-                    data.map((e, i) => {
+                    data.filter(d => d.name.toLowerCase().includes(search.toLowerCase())).map((e, i) => {
                         return(
                             <div key={id+"-"+i}>
                                 <div>

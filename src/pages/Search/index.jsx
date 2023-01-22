@@ -9,16 +9,16 @@ import { useState } from 'react';
 
 export default function Search()
 {
-    const {animals, getFavourites, addToFavourite, loading} = getAllAnimals();
+    const {animals, getAnimals, loading} = getAllAnimals();
     const [species, loading_species, error] = getSpiecies(); 
 
-    const [searchBySpecie, setSearchBySpecie] = useState('');
+    const [searchBySpecie, setSearchBySpecie] = useState('all');
     const [searchByName, setSearchByName] = useState('');
     
     console.log(animals);
     useEffect(() => 
     {
-        getFavourites();
+        getAnimals();
     }, [])
 
     return(
@@ -51,8 +51,9 @@ export default function Search()
                                     name="species"
                                     placeholder='Species'
                                     onChange={e => setSearchBySpecie(e.target.value)}
+                                    defaultValue={'all'}
                                 >
-                                    <MenuItem value={''}>All</MenuItem>
+                                    <MenuItem value={'all'}>All</MenuItem>
                                     {
                                         species.map((sp, index) => {
                                             return(
@@ -65,7 +66,7 @@ export default function Search()
                         </div>
                         <Grid
                             titleKey='name'
-                            data={animals.filter(a => a.name.toUpperCase().includes(searchByName.toUpperCase()) && ((typeof(searchBySpecie) == 'string' && searchBySpecie.replace(' ', '').length === 0) || searchBySpecie == a.species)).map(d => ({...d, image: `http://localhost:3001/animals/${JSON.parse(d.photos)[0]}`, link: `/animal/${d.slug}`}))}
+                            data={animals.filter(a => a.name.toUpperCase().includes(searchByName.toUpperCase()) && (searchBySpecie == 'all' || searchBySpecie == a.species)).map(d => ({...d, image: d.photos[0], link: `/animal/${d.slug}`}))}
                             imageKey={'photos'}
                         />
                     </div>

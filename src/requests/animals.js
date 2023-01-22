@@ -65,7 +65,7 @@ export const getAnimalBySlug = (slug) =>
     const [animal, setAnimal] = useState({});
     const [error, setError] = useState(null)
 
-    async function editAnimal(data)
+    async function editAnimal(data, callback)
     {
         try {
             const res = await axios.post(`http://localhost:3001/animal/edit`, data, {withCredentials: true})
@@ -73,6 +73,11 @@ export const getAnimalBySlug = (slug) =>
                 ...animal,
                 liked: !animal.liked
             });
+
+            if(callback)
+            {
+                callback();
+            }
         }catch(err)
         {
             alert("An error occured...");
@@ -174,12 +179,16 @@ export const getAllAnimals = () =>
         }
     }
 
-    async function addAnimal(data)
+    async function addAnimal(data, callback)
     {
         setLoading(true);
         try{
             const res = await axios.post('http://localhost:3001/animals', data, {withCredentials: true});
             setLoading(false);
+            if(callback)
+            {
+                callback();
+            }
         }catch(err)
         {
             setLoading(false);

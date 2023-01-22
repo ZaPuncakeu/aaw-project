@@ -5,10 +5,11 @@ import { Button, MenuItem, Select, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { getSpiecies } from '../../requests/species';
 import Map from '../../components/Map/Map';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 export default function EditAnimal()
 {
     const { slug } = useParams();
+    const navigate = useNavigate();
     const [
         animal, 
         edit_loading, 
@@ -146,7 +147,10 @@ export default function EditAnimal()
                 
         }
 
-        editAnimal(formData);
+        editAnimal(formData, () =>
+        {
+            navigate('/admin/animals');
+        });
     }
 
     return(
