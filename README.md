@@ -5,8 +5,12 @@ Ce site a été créé avec les technologies suivantes :
 * ReactJS v18.12 + Vite 
 * Redux
 * Sass
-* NodeJs + Express
-* JWT
+* Nodejs 18.12.1
 * Postgresql 15
 
-##Configuration
+## Configuration et mise en place ##
+
+Afin de lancer le projet sans problème il faut d'abord avoir :
+* [Nodejs](https://nodejs.org/en/) v18.12.1 
+* [Postgresql](https://www.postgresql.org/download/) 15 + pgAdmin 4
+* [Vite](https://vitejs.dev)
