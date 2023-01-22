@@ -1,6 +1,12 @@
 # Projet AAW : Zoo management website
 Projet Gestion d'un Zoo pour le module AAW - [Université de Poitiers](https://www.univ-poitiers.fr) 2022
 
+Ce projet a été réalisé par :
+* ROUANE Anis
+* BENDAHOU Ahlam
+* MAHMAT SEID Ahmat
+* ADNANE Laanani
+
 Ce site a été créé avec les technologies suivantes : 
 * ReactJS v18.12 + Vite 
 * Redux
