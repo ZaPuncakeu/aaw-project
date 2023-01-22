@@ -46,7 +46,7 @@ export default function AddAnimal()
     function deleteAlias(index)
     {
         let arr = aliases.filter((_, i) => i !== index);
-        console.log(arr);
+        
         setAliases(arr);
     }
 
@@ -60,7 +60,7 @@ export default function AddAnimal()
     function deleteContinent(index)
     {
         let arr = continent.filter((_, i) => i !== index);
-        console.log(arr);
+        
         setContinent(arr);
     }
 
@@ -74,12 +74,12 @@ export default function AddAnimal()
     function deleteCountry(index)
     {
         let arr = country.filter((_, i) => i !== index);
-        console.log(arr);
+        
         setCountry(arr);
     }
 
     useEffect(() => {
-        console.log(photos);
+        
     }, [photos])
 
     function handleSubmit(e)
@@ -109,7 +109,7 @@ export default function AddAnimal()
         data['length'] = length;
         data['position'] = position;
 
-        console.log(data);
+        
 
         const formData = new FormData();
         for(let key of Object.keys(data))
@@ -492,7 +492,7 @@ export default function AddAnimal()
                                             {
                                                 arr.push(p);
                                             }
-                                            console.log(arr);
+                                            
                                             setPhotos([...arr]);
                                         }
                                     }} 

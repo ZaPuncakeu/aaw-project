@@ -11,7 +11,7 @@ export default function Grid({
     deleteAction,
     titleKey='title'
 }){
-    console.log(data);
+    
     return(
         <div className="collection-container">
             {

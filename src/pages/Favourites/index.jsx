@@ -8,7 +8,7 @@ import { TextField } from '@mui/material';
 export default function Favourites()
 {
     const {animals, getFavourites, addToFavourite, loading} = getAllAnimals();
-    console.log("ANIMALS", animals)
+    
     useEffect(() => 
     {
         getFavourites();

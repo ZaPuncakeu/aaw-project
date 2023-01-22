@@ -28,16 +28,16 @@ export default function Map({
         {
             if(mouseOver)
             {
-                console.log(e.key)
+                
                 if(['+'].indexOf(e.key) != -1)
                 {
-                    console.log(e.key);
+                    
                     setScale(scale+0.1)
                 }
 
                 if(['-'].indexOf(e.key) != -1)
                 {
-                    console.log(e.key);
+                    
                     setScale(scale-0.1)
                 }
             }
@@ -84,7 +84,7 @@ export default function Map({
                         let bounds = e.target.getBoundingClientRect();
                         let x = e.clientX - bounds.x;
                         let y = e.clientY - bounds.y;
-                        console.log(x,y);
+                        
                         if(editable)
                             setMarker([parseInt(x), parseInt(y)]);
                     }}

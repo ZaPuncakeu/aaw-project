@@ -13,14 +13,13 @@ function init_db()
 {
     return new Promise(async (resolve, reject) => {
         const client = new Client({
-            host: 'localhost',
-            port: 5432,
-            user: 'postgres',
-            password: 'anis2023'
+            host: process.env.DATABASE_HOST,
+            port: process.env.DATABASE_PORT,
+            user: process.env.DATABASE_USERNAME,
+            password: process.env.DATABASE_PASSWORD
         })
         await client.connect();
-        const database = fs.readFileSync(`${__dirname}/setup_database.sql`).toString();
-        const res = await client.query(database);
+        const res = await client.query(`CREATE DATABASE ${process.env.DATABASE_NAME}`);
         console.log('Database initialized');
         client.end();
         resolve(true);
@@ -31,11 +30,11 @@ function init_tables()
 {
     return new Promise(async (resolve, reject) => {
         const client = new Client({
-            host: 'localhost',
-            port: 5432,
-            user: 'postgres',
-            password: 'anis2023',
-            database: 'zoo_aaw'
+            host: process.env.DATABASE_HOST,
+            port: process.env.DATABASE_PORT,
+            user: process.env.DATABASE_USERNAME,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE_NAME
         })
 
         await client.connect();

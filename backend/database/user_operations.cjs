@@ -1,9 +1,10 @@
+require('dotenv').config();
+
 const bcryptjs = require('bcryptjs');
 const numSaltRounds = 10;
 
-bcryptjs.hash('admin', numSaltRounds).then(console.log)
 const jwt = require('jsonwebtoken');
-const secret = 'AAW_THE_ZOO';
+const secret = process.env.JWT_SECRET;
 
 const fetch_users = (db) => {
 
@@ -15,7 +16,7 @@ const fetch_users_by_email = (db, email) => {
             const res = await db.query('SELECT * FROM users WHERE email=$1', [email]);
             resolve(res.rows);
         }catch(error) {
-            console.log(error);
+            
             reject(error);
         }
     });
@@ -27,7 +28,7 @@ const fetch_admin_by_email = (db, email) => {
             const res = await db.query('SELECT * FROM admin WHERE email=$1', [email]);
             resolve(res.rows);
         }catch(error) {
-            console.log(error);
+            
             reject(error);
         }
     });
@@ -83,7 +84,7 @@ const login = (db, data) => {
                 }
             });
         }catch(error) {
-            console.log(error);
+            
             reject(error);
         }
     });
@@ -100,7 +101,7 @@ const add_token = (db, token) => {
             ]);
             resolve(true);
         } catch(error) {
-            console.log(error);
+            
             reject(error);
         }
     });
@@ -118,7 +119,7 @@ const insert_user = (db, data) => {
 
             resolve(true);
         }catch(error) {
-            console.log(error);
+            
             reject(error);
         }
     });
@@ -157,7 +158,7 @@ const register = (db, data) => {
             const {token, type} = await login(db, data);
             return resolve({token, type});
         }catch(error) {
-            console.log(error);
+            
             return reject(error);
         }
     });
@@ -178,20 +179,20 @@ const get_user_by_token = (db, token) => {
             }
             return resolve({user: t.id, type: t.type});
         }catch(error) {
-            console.log(error);
+            
             reject(error);
         }
     });
 }
 
 const logout_user_with_token = (db, token) => {
-    console.log('logout');
+    
     return new Promise(async (resolve, reject) => {
         try{
             const res = await db.query('DELETE FROM tokens WHERE token=$1', [token]);
             return resolve(true);
         }catch(error) {
-            console.log(error);
+            
             reject(error);
         }
     });

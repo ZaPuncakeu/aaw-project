@@ -4,7 +4,7 @@ import axios from 'redaxios'
 
 export const getAnimalsOfSpecie = (specie) => 
 {
-    console.log("getAnimalsOfSpecie "+specie);
+    
     const [loading, setLoading] = useState(true);
     const [animals, setAnimals] = useState([]);
     const [error, setError] = useState(null);
@@ -25,7 +25,7 @@ export const getAnimalsOfSpecie = (specie) =>
         }catch(err)
         {
             alert("An error occured...");
-            console.log(err);
+            
         }
     }
 
@@ -39,7 +39,7 @@ export const getAnimalsOfSpecie = (specie) =>
                 let animal = res.data.map(a => ({...a, image: 'http://localhost:3001/animals/'+JSON.parse(a.photos)[0]}))
                 
                 setLoading(false);
-                console.log(animal)
+                
                 setAnimals(animal);
                 setTitle(res.data[0].title)
             }catch(err)
@@ -60,7 +60,7 @@ export const getAnimalsOfSpecie = (specie) =>
 
 export const getAnimalBySlug = (slug) => 
 {
-    console.log("getAnimalsBySlug "+slug);
+    
     const [loading, setLoading] = useState(true);
     const [animal, setAnimal] = useState({});
     const [error, setError] = useState(null)
@@ -81,7 +81,7 @@ export const getAnimalBySlug = (slug) =>
         }catch(err)
         {
             alert("An error occured...");
-            console.log(err);
+            
         }
     }
 
@@ -96,13 +96,13 @@ export const getAnimalBySlug = (slug) =>
         }catch(err)
         {
             alert("An error occured...");
-            console.log(err);
+            
         }
     }
     
     useEffect(() => 
     {
-        console.log(setLoading);
+        
         //setLoading(true)
         (async () => {
             try
@@ -121,7 +121,7 @@ export const getAnimalBySlug = (slug) =>
                     }
                 })[0]
 
-                console.log(animal_db)
+                
                 setAnimal(animal_db);
                 setLoading(false);
             }catch(err)
@@ -161,7 +161,7 @@ export const getAllAnimals = () =>
         }catch(err)
         {
             alert("An error occured...");
-            console.log(err);
+            
         }
     }
 
@@ -175,7 +175,7 @@ export const getAllAnimals = () =>
         }catch(err)
         {
             setLoading(false);
-            console.log(err);
+            
         }
     }
 
@@ -192,7 +192,7 @@ export const getAllAnimals = () =>
         }catch(err)
         {
             setLoading(false);
-            console.log(err);
+            
         }
     }
 
@@ -203,7 +203,7 @@ export const getAllAnimals = () =>
             setLoading(true);
             const animal = await axios.get('http://localhost:3001/animal', {withCredentials: true});
             let animal_db = animal.data;
-            console.log(animal_db);
+            
             animal_db = animal_db.map(an => {
                 return {
                     ...an,
@@ -217,7 +217,7 @@ export const getAllAnimals = () =>
                 }
             })
 
-            console.log(animal_db)
+            
             setAnimals(animal_db);
             setLoading(false);
         }catch(err)
@@ -229,18 +229,18 @@ export const getAllAnimals = () =>
 
     async function getFavourites()
     {
-        console.log("HERE");
+        
         try
         {
             setLoading(true);
             const animal = await axios.get('http://localhost:3001/favourite', {withCredentials: true});
             let animal_db = animal.data;
-            console.log(animal_db)
+            
             setAnimals(animal_db);
             setLoading(false);
         }catch(err)
         {
-            console.log(err);
+            
             setLoading(false);
             setError(err);
         }

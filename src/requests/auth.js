@@ -25,7 +25,7 @@ export const useLogin = ({onSuccess, onFailure}) =>
             setLoading(true)
             const res = await axios.post('http://localhost:3001/login', data, {withCredentials: true});
 
-            console.log(res);
+            
             dispatch(login(res.data));
             setLoading(false);
             onSuccess("done");
@@ -82,7 +82,7 @@ export const useRegister = ({onSuccess, onFailure}) =>
             
             const res = await axios.post('http://localhost:3001/register', data, {withCredentials: true});
 
-            console.log(res);
+            
             dispatch(login(res.data));
             setLoading(false);
         }catch(err)
@@ -118,9 +118,9 @@ export const useLogout = ({onSuccess, onFailure}) =>
         try
         {
             setLoading(true)
-            console.log('logout')
+            
             const res = await axios.post('http://localhost:3001/logout', {}, {withCredentials: true});
-            console.log("done logout")
+            
             dispatch(logout());
             setLoading(false);
         }catch(err)
@@ -154,13 +154,13 @@ export function useConnected()
             try
             {
                 const res = await axios.get('http://localhost:3001/is_connected', { withCredentials: true });
-                console.log("hi");
+                
                 dispatch(login(res.data));
                 setLoading(false);
-                console.log('connected');
+                
             }catch(err)
             {
-                console.log('not connected');
+                
                 setLoading(false);
                 dispatch(logout());
             }

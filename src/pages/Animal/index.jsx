@@ -9,7 +9,7 @@ export default function Animal()
 {
     const { animalslug } = useParams();
     const [animal, loading, error, addToFavourite] = getAnimalBySlug(animalslug);
-    console.log(animal);
+    
     return(
         <div id="animal-info" style={{
             [loading ? 'height' : 'minHeight']: '100vh'

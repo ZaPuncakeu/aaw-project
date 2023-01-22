@@ -48,7 +48,7 @@ const addAnimal = async (req, res) => {
                 console.error(err2)
             }
         }
-        console.log(err);
+        
         await db.end();
         res.status(500).json(err);
     }
@@ -59,7 +59,7 @@ const getSpeciesRoute = async (req, res) => {
     try{
         await db.connect();
         const species = await fetchSpecies(db);
-        console.log(species);
+        
         await db.end();
         res.status(200).json(species);
     }catch(err)
@@ -74,7 +74,7 @@ const getAnimalsRoute = async (req, res) => {
     try{
         await db.connect();
         const animals = await getAllAnimals(db, req['type'], req['user']);
-        console.log(animals);
+        
         await db.end();
         res.status(200).json(animals);
     }catch(err)
@@ -90,7 +90,7 @@ const getAnimalsOfSpecie = async (req, res) =>
     try{
         await db.connect();
         const animals = await getAnimalsBySpecieSlug(db, req.params.specie, req['type'], req['user']);
-        console.log(animals);
+        
         await db.end();
         res.status(200).json(animals);
     }catch(err)
@@ -101,12 +101,12 @@ const getAnimalsOfSpecie = async (req, res) =>
 }
 
 const toggleFavouriteRoute = async (req, res) => {
-    console.log(req.body);
+    
     const db = get_db();
     try{
         await db.connect();
         const animals = await toggleFavourite(db, req['user'], req.body.id_animal, req.body.slug);
-        console.log(animals);
+        
         await db.end();
         res.status(200).json(animals);
     }catch(err)
@@ -118,12 +118,12 @@ const toggleFavouriteRoute = async (req, res) => {
 
 const getAnimalRoute = async (req, res) => 
 {
-    console.log(req['user'], req['type']);
+    
     const db = get_db();
     try{
         await db.connect();
         const animals = await getAnimalBySlug(db, req.params.slug, req['type'], req['user']);
-        console.log(animals);
+        
         await db.end();
         res.status(200).json(animals);
     }catch(err)
@@ -143,7 +143,7 @@ const editAnimalRoute = async (req, res) => {
         
         const images = [];
 
-        console.log(data);
+        
         for(let img of data.oldPhotos.split(','))
         {
             images.push(img);
@@ -154,7 +154,7 @@ const editAnimalRoute = async (req, res) => {
             images.push(img.filename);
         }
 
-        console.log(images);
+        
         data['photos'] = [...images];
 
         if(Object.keys(data).indexOf('new_species') != -1)
@@ -176,7 +176,7 @@ const editAnimalRoute = async (req, res) => {
                 console.error(err2)
             }
         }
-        console.log(err);
+        
         await db.end();
         res.status(500).json(err);
     }
@@ -184,12 +184,12 @@ const editAnimalRoute = async (req, res) => {
 
 const getFavouritesRoute = async (req, res) => 
 {
-    console.log("hereaaaaaaaaaaaaaaaa 2");
+    
     const db = get_db();
     try{
         await db.connect();
         const animals = await getFavourites(db, req['user']);
-        console.log(animals);
+        
         await db.end();
         res.status(200).json(animals);
     }catch(err)
@@ -201,12 +201,12 @@ const getFavouritesRoute = async (req, res) =>
 
 const deleteAnimalRoute = async (req, res) => 
 {
-    console.log("hereaaaaaaaaaaaaaaaa 2");
+    
     const db = get_db();
     try{
         await db.connect();
         const animals = await deleteAnimal(db, req.params.slug);
-        console.log(animals);
+        
         await db.end();
         res.status(200).json(animals);
     }catch(err)

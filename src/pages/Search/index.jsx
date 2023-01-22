@@ -15,7 +15,7 @@ export default function Search()
     const [searchBySpecie, setSearchBySpecie] = useState('all');
     const [searchByName, setSearchByName] = useState('');
     
-    console.log(animals);
+    
     useEffect(() => 
     {
         getAnimals();

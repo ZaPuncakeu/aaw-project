@@ -1,6 +1,6 @@
 async function insertAnimal(db, data)
 {
-    console.log("Inserting animal...", data);
+    
     const slug = data['name'].toLowerCase().replace(' ', '-');
     return new Promise(async (resolve, reject) => {
         try{
@@ -13,7 +13,7 @@ async function insertAnimal(db, data)
                 })
             }
 
-            console.log("lifespan", data['lifespan'])
+            
             await db.query('INSERT INTO animals (name, photos, aliases, continent, countries, description, origin_description, lifestyle, nutrition, diet, species, lifespan, position, weight, length, slug) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)', [
                 data['name'],
                 JSON.stringify(data['photos']),
@@ -35,7 +35,7 @@ async function insertAnimal(db, data)
 
             resolve('done');
         }catch(error) {
-            console.log("Error insert animal...", error);
+            
             reject(error);
         }
     });
@@ -43,7 +43,7 @@ async function insertAnimal(db, data)
 
 async function editAnimal(db, data)
 {
-    console.log("Editing animal...", data);
+    
     const slug = data['name'].toLowerCase().replace(' ', '-');
     return new Promise(async (resolve, reject) => {
         try{
@@ -56,7 +56,7 @@ async function editAnimal(db, data)
                 })
             }
 
-            console.log("lifespan", data['lifespan'])
+            
             await db.query(`UPDATE animals 
                             SET name=$1, 
                                 photos=$2, 
@@ -96,7 +96,7 @@ async function editAnimal(db, data)
 
             resolve('done');
         }catch(error) {
-            console.log("Error editing animal...", error);
+            
             reject(error);
         }
     });
@@ -123,7 +123,7 @@ function getAnimalBySlug(db, slug, user_type, id_user)
             }
                 resolve(res.rows);
         }catch(error) {
-            console.log(error);
+            
             reject(error);
         }
     });
@@ -136,7 +136,7 @@ function fetchSpecies(db)
             const res = await db.query('SELECT COUNT(*) AS count, id_specie, title, image, species.slug FROM species, animals WHERE species.id_specie=animals.species GROUP BY species.id_specie');
             resolve(res.rows);
         }catch(error) {
-            console.log("Error fetch species...", error);
+            
             reject(error);
         }
     });
@@ -162,10 +162,10 @@ async function addSpecie(db, title, image)
                 image
             ]);
 
-            console.log(result);
+            
             return resolve(result.rows[0].id_specie);
         }catch(error) {
-            console.log("Error addSpecies...", error);
+            
             return reject(error);
         }
     });
@@ -176,7 +176,7 @@ function getAllAnimals(db, user_type, id)
     return new Promise(async (resolve, reject) => {
         try{
             const res = await db.query('SELECT * FROM animals');
-            console.log("rows : ", res.rows);
+            
             resolve(res.rows);
         }catch(error) {
             reject(error);
@@ -186,7 +186,7 @@ function getAllAnimals(db, user_type, id)
 
 function toggleFavourite(db, id_user, id_animal, slug)
 {
-    console.log(id_user, id_animal, slug);
+    
     return new Promise(async (resolve, reject) => {
         try{
             let res = await db.query('SELECT * FROM favourites WHERE id_user=$1 AND id_animal=$2', [
@@ -218,7 +218,7 @@ function toggleFavourite(db, id_user, id_animal, slug)
 
 function deleteAnimal(db, slug)
 {
-    console.log(slug);
+    
     return new Promise(async (resolve, reject) => {
         try{
             
@@ -229,7 +229,7 @@ function deleteAnimal(db, slug)
             ]);
             resolve(res.rows);
         }catch(error) {
-            console.log("Error fetch species...", error);
+            
             reject(error);
         }
     })
@@ -237,7 +237,7 @@ function deleteAnimal(db, slug)
 
 function getFavourites(db, id_user)
 {
-    console.log("my_user", id_user);
+    
     return new Promise(async (resolve, reject) => {
         try{
             
@@ -252,7 +252,7 @@ function getFavourites(db, id_user)
             resolve(res.rows);
 
         }catch(error) {
-            console.log("Error fetch species...", error);
+            
             reject(error);
         }
     });
@@ -286,7 +286,7 @@ function getAnimalsBySpecieSlug(db, specie, user_type, id)
             
             resolve(res.rows);
         }catch(error) {
-            console.log("Error fetch species...", error);
+            
             reject(error);
         }
     });

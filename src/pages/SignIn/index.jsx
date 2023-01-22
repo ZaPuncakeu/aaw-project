@@ -7,12 +7,12 @@ export default function SignIn()
 {
     const onSuccess = (message) => 
     {
-        console.log("Successfully signed in...");
+        
     }
     
     const onFailure = (error) => 
     {
-        console.log(error);
+        
         alert("Error on either the email or password");
     }
 

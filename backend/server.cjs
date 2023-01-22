@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: [`http://localhost:${process.env.CLIENT_PORT}`, `http://127.0.0.1:${process.env.CLIENT_PORT}`],
     credentials: true
 }));
 
@@ -69,6 +69,6 @@ const upload = multer({ dest: `${__dirname}/public/animals` });
 })();
 
 process.on('unhandledRejection', (reason, p) => {
-    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+    console.log(reason);
     // application specific logging, throwing an error, or other logic here
 });

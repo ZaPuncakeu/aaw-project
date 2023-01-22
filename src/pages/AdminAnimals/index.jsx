@@ -12,7 +12,7 @@ export default function AdminAnimals()
     function deleteAction(slug){
         if(window.confirm('Are you sure you want to delete it? It is not reversible...'))
         {
-            console.log(slug);
+            
             deleteAnimal(slug);
             location.reload();
         }

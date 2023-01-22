@@ -27,7 +27,7 @@ export default function EditAnimal()
     const [photos, setPhotos] = useState([]);
     const [position, setPosition] = useState([0,0]);
     const [oldPhotos, setOldPhotos] = useState([]);
-    console.log(animal)
+    
     useEffect(()=>{
         if(animal && Object.keys(animal).length > 0)
         {
@@ -66,7 +66,7 @@ export default function EditAnimal()
     function deleteAlias(index)
     {
         let arr = [...aliases].filter((_, i) => i !== index);
-        console.log(arr);
+        
         setAliases(arr);
     }
 
@@ -80,7 +80,7 @@ export default function EditAnimal()
     function deleteContinent(index)
     {
         let arr = [...continent].filter((_, i) => i !== index);
-        console.log(arr);
+        
         setContinent(arr);
     }
 
@@ -94,12 +94,12 @@ export default function EditAnimal()
     function deleteCountry(index)
     {
         let arr = [...country].filter((_, i) => i !== index);
-        console.log(arr);
+        
         setCountry(arr);
     }
 
     useEffect(() => {
-        console.log(photos);
+        
     }, [photos])
 
     function handleSubmit(e)
@@ -124,14 +124,14 @@ export default function EditAnimal()
         data['aliases'] = aliases;
         data['photos'] = photos;
         data['oldPhotos'] = oldPhotos.map(ph => ph.split('/').pop());
-        console.log(data)
+        
         data['continent'] = continent;
         data['countries'] = country;
         data['weight'] = weight;
         data['length'] = length;
         data['position'] = position;
 
-        console.log(data);
+        
 
         const formData = new FormData();
         for(let key of Object.keys(data))
@@ -531,7 +531,7 @@ export default function EditAnimal()
                                                     {
                                                         arr.push(p);
                                                     }
-                                                    console.log(arr);
+                                                    
                                                     setPhotos([...arr]);
                                                 }
                                             }} 
