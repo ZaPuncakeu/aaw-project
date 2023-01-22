@@ -7,12 +7,12 @@ export default function SignUp()
 {
     const onSuccess = (message) => 
     {
-        console.log(message);
+        
     }
     
     const onFailure = (error) => 
     {
-        console.log(error);
+        
     }
 
     const { sendRegister, loading, error } = useRegister({onSuccess, onFailure});

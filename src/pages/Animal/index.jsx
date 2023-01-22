@@ -4,14 +4,15 @@ import Loading from '../../components/Loading';
 import './Animal.scss'
 import { motion } from 'framer-motion'
 import Gallery from '../../components/Gallery';
+import { useSelector } from 'react-redux';
 export default function Animal()
 {
     const { animalslug } = useParams();
-    const [animal, loading, error] = getAnimalBySlug(animalslug);
-    console.log(animal);
+    const [animal, loading, error, addToFavourite] = getAnimalBySlug(animalslug);
+    
     return(
         <div id="animal-info" style={{
-            [loading ? 'height' : 'min-height']: '100vh'
+            [loading ? 'height' : 'minHeight']: '100vh'
         }}>
             {
                 loading ? 
@@ -19,6 +20,7 @@ export default function Animal()
                 :
                 <Description
                     data={animal}
+                    addToFavourite={addToFavourite}
                 />
             }
         </div>
@@ -26,9 +28,11 @@ export default function Animal()
 }
 
 function Description({
-    data
+    data,
+    addToFavourite
 })
 {
+    const type = useSelector(state => state.user.token)
     return(
         <motion.div 
             className='info-animal-container'
@@ -45,6 +49,21 @@ function Description({
                 </div>
                 <div>
                     <h1 className='main-title'>{data.name}</h1>
+                    {
+                        type === 'user' ?
+                        <button 
+                            className='add-to-fav'
+                            onClick={e => addToFavourite(data.id_animal, data.slug)}
+                            style={{
+                                color: data.liked ? 'red' : 'black',
+                                borderColor: data.liked ? 'red' : 'black'
+                            }}
+                        >
+                            <i className={`fa fa-${data.liked ? 'times' : 'heart'}`}></i> &nbsp; {data.liked ? "Remove from":"Add to"} favourite
+                        </button>
+                        :
+                        null
+                    }
                     <p>
                         <b>Also known as:</b><br/>
                         {data.aliases.join(', ').toUpperCase()}
@@ -55,8 +74,8 @@ function Description({
                     <p>
                         <b>Specie:</b>
                         &nbsp;
-                        <Link to={`/species/${data.species_slug}`}>
-                            {data.species}
+                        <Link to={`/species/${data.specie_slug}`}>
+                            {data.title}
                         </Link>
                         <br/>
 
@@ -72,7 +91,7 @@ function Description({
                         
                         <b>Diet:</b>
                         &nbsp;
-                        {data.diet.join(', ')}
+                        {data.diet}
                     </p>
                     
                     <hr/>
@@ -85,7 +104,7 @@ function Description({
                         
                         <div>
                             <h2 className='main-title'>life span</h2>
-                            <span>{data.life_span} YEARS</span>
+                            <span>{data.lifespan} YEARS</span>
                         </div>
                         
                         <div>

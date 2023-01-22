@@ -1,0 +1,23 @@
+.map-container 
+{
+    border: solid black 2px;
+    overflow: auto;
+
+    &>.map 
+    {
+        width: 1526px;
+        height: 1080px;
+        scroll-margin-inline-end: 20px;
+    }
+
+    .marker 
+    {
+        color: rgb(249, 209, 77);
+        font-size: 3rem;
+    }
+
+    .animal-preview:hover
+    {
+        border-color: rgb(10, 6, 255);
+    }
+}

@@ -8,7 +8,7 @@ export default function Logout()
     const { sendLogout } = useLogout({onSuccess, onFailure})
     const navigate = useNavigate();
 
-    console.log("bruh")
+    
     function onFailure()
     {
 

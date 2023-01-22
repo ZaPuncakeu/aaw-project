@@ -1,15 +1,15 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import Map from '../../components/Map/Map';
 import Section from '../../components/Section';
 import { getAttractions } from '../../requests/attractions';
-import { getEndangeredSpiecies, getSpiecies } from '../../requests/species';
+import { getSpiecies } from '../../requests/species';
 import './Home.scss'
 
 export default function Home()
 {
     const [species, loading_species, error_species] = getSpiecies();
     const [attractions, loading_attractions, error_attraction] = getAttractions();
-    const [endangered, loading_endangered, error_endangered] = getEndangeredSpiecies();
     return(
         <div id="home">
             <motion.div 
@@ -67,7 +67,7 @@ export default function Home()
                         A place where you can connect with the wild
                     </motion.h2>
 
-                    <Link style={{textDecoration: 'none'}}>
+                    <Link to='/species' style={{textDecoration: 'none'}}>
                         <motion.div
                             initial={{
                                 opacity: 0
@@ -128,7 +128,7 @@ export default function Home()
                 title={"Species you'll find here"}
                 icon={"paw"}
                 id="species-preview"
-                data={species.slice(0, 5)}
+                data={species.map(s => ({...s, link: `/species/${s.slug}`})).slice(0, 5)}
                 style={'styled'}
                 decoration={
                     <>
@@ -156,53 +156,16 @@ export default function Home()
                 btnText="See all the species you can find here!"
                 btnLink="/species"
             />
-
-            <Section
-                title={"Our attractions"}
-                icon={"gamepad"}
-                id="attraction-preview"
-                data={attractions.slice(0, 3)}
-                style='rounded'
-                decoration={
-                    <>
-                        <div style={{
-                            width: "40vw",
-                            height: "40vw",
-                            borderRadius: "50%",
-                            backgroundColor: "#193B3B",
-                            position: "absolute",
-                            left: '-20vw',
-                            zIndex: 1
-                        }}></div>
-                    </>
-                }
-                btnText="See all of our attractions"
-                btnLink="/activities"
-            />
-
-            {/*
-            <Section
-                title={"Help us protect endangered spiecies"}
-                icon={"shield"}
-                id="animals-preview"
-                data={endangered.slice(0,5)}
-                decoration={
-                    <>
-                        <div style={{
-                            width: "40vw",
-                            height: "40vw",
-                            borderRadius: "50%",
-                            backgroundColor: "#FFBF00",
-                            position: "absolute",
-                            right: '-20vw',
-                            zIndex: 1
-                        }}></div>
-                    </>
-                }
-                btnText="See all of the endangered spiecies"
-                btnLink="/endangered-spiecies"
-            /> */}    
             
+            <h1 className='main-title' style={{textAlign: 'center'}}>Find our animals through the map!</h1>
+            <Map
+                style={{
+                    width: '90%',
+                    height: '700px',
+                    margin: 'auto'
+                }}
+            />
+            <br /><br />
                 
         </div>
     )

@@ -1,0 +1,21 @@
+#admin {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    min-height: 100vh;
+    &>nav {
+        text-align: center;
+    }
+
+    &>div {
+        width: 90%;
+        margin: auto;
+        #add_button
+        {
+            width: 100%;
+            display: flex;
+            justify-content: flex-ends;
+        }
+    }
+}

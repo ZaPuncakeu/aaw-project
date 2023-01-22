@@ -6,10 +6,10 @@ import { useParams } from "react-router-dom"
 export default function Animals()
 {
     const { specie } = useParams();
-    const [animals, loading, error, title] = getAnimalsOfSpecie(specie);
+    const [animals, loading, error, title, toggleFavourite] = getAnimalsOfSpecie(specie);
     return(
         <div id="animal-list" style={{
-            [loading ? 'height' : 'min-height']: '100vh'
+            [loading ? 'height' : 'minHeight']: '100vh'
         }}>
             {
                 loading ? 
@@ -18,6 +18,7 @@ export default function Animals()
                 <InfoList
                     id="animal"
                     data={animals}
+                    addToFavourite={toggleFavourite}
                     title={`The ${title} you'll find around`}
                 />
             }

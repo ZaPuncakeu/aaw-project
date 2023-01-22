@@ -7,13 +7,13 @@ export default function SignIn()
 {
     const onSuccess = (message) => 
     {
-        alert("Success!");
+        
     }
     
     const onFailure = (error) => 
     {
-        console.log(error);
-        alert("Failure!!!");
+        
+        alert("Error on either the email or password");
     }
 
     const { sendLogin, loading, error } = useLogin({onSuccess, onFailure});

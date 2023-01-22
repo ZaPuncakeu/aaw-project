@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login, logout } from "../slices/userSlice";
+import axios from 'redaxios';
 
 export const useLogin = ({onSuccess, onFailure}) => 
 {
@@ -22,14 +23,21 @@ export const useLogin = ({onSuccess, onFailure}) =>
             }
 
             setLoading(true)
-            setTimeout(() => {
-                dispatch(login("TOKEN"));
-                setLoading(false);
-                onSuccess("done");
-            }, 2000);
+            const res = await axios.post('http://localhost:3001/login', data, {withCredentials: true});
+
+            
+            dispatch(login(res.data));
+            setLoading(false);
+            onSuccess("done");
         }catch(err)
         {
-            setError(err);
+            let error;
+            if(err.error && err.error.response)
+                error = err.error.response;
+            else
+                error = err;
+            setLoading(false);
+            setError(err.data);
             onFailure(err);
         }
     }
@@ -71,15 +79,23 @@ export const useRegister = ({onSuccess, onFailure}) =>
             }
 
             setLoading(true)
-            setTimeout(() => {
-                dispatch(login("TOKEN"));
-                setLoading(false);
-                onSuccess("done");
-            }, 2000);
+            
+            const res = await axios.post('http://localhost:3001/register', data, {withCredentials: true});
+
+            
+            dispatch(login(res.data));
+            setLoading(false);
         }catch(err)
         {
-            setError(err);
-            onFailure(err);
+            let error;
+            if(err.error && err.error.response)
+                error = err.error.response;
+            else
+                error = err;
+                
+            setError(error.data);
+            setLoading(false)
+            onFailure(error);
         }
     }
 
@@ -102,15 +118,22 @@ export const useLogout = ({onSuccess, onFailure}) =>
         try
         {
             setLoading(true)
-            setTimeout(() => {
-                dispatch(logout());
-                setLoading(false);
-                onSuccess();
-            }, 2000);
+            
+            const res = await axios.post('http://localhost:3001/logout', {}, {withCredentials: true});
+            
+            dispatch(logout());
+            setLoading(false);
         }catch(err)
         {
-            setError(err);
+            let error;
+            if(err.error && err.error.response)
+                error = err.error.response;
+            else
+                error = err;
+                
+            setError(err.data);
             onFailure(err);
+            setLoading(false);
         }
     }
 
@@ -124,33 +147,27 @@ export const useLogout = ({onSuccess, onFailure}) =>
 export function useConnected()
 {
     const dispatch = useDispatch();
-    const [userType, setUserType] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-
     useEffect(() =>
     {
         (async () => {
-            setError(null);
             try
             {
-                setLoading(true)
-                setTimeout(() => {
-                    dispatch(logout());
-                    setLoading(false);
-                    onSuccess();
-                }, 2000);
+                const res = await axios.get('http://localhost:3001/is_connected', { withCredentials: true });
+                
+                dispatch(login(res.data));
+                setLoading(false);
+                
             }catch(err)
             {
-                setError(err);
-                onFailure(err);
+                
+                setLoading(false);
+                dispatch(logout());
             }
         })();
     }, []);
 
     return {
-        type,
         loading,
-        error
     };
 }

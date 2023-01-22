@@ -29,7 +29,7 @@ export const getAttractions = () =>
 
 export const getAttractionBySlug = (slug) => 
 {
-    console.log("getAttractionBySlug: ", slug);
+    
     const [loading, setLoading] = useState(true);
     const [attraction, setAttraction] = useState({});
     const [error, setError] = useState(null)
