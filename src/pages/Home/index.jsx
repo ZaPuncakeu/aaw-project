@@ -128,7 +128,7 @@ export default function Home()
                 title={"Species you'll find here"}
                 icon={"paw"}
                 id="species-preview"
-                data={species.slice(0, 5)}
+                data={species.map(s => ({...s, link: `/species/${s.slug}`})).slice(0, 5)}
                 style={'styled'}
                 decoration={
                     <>

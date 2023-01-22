@@ -20,7 +20,7 @@ CREATE TABLE public.animals (
     id_animal SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     photos TEXT NOT NULL,
-    aliases TEXT UNIQUE NOT NULL,
+    aliases TEXT NOT NULL,
     continent TEXT NOT NULL,
     countries TEXT NOT NULL,
     description TEXT NOT NULL,
