@@ -35,5 +35,5 @@ Pour lancer le projet (client + serveur) 2 commandes sont disponibles :
 
 ### Accès admin ###
 Les accès admin sont par défaut : 
-* Email `admin@test.com`
-* Mot de passe `admin`
+* Email : `admin@test.com`
+* Mot de passe : `admin`
