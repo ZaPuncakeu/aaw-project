@@ -14,3 +14,7 @@ Afin de lancer le projet sans problème il faut d'abord avoir :
 * [Nodejs](https://nodejs.org/en/) v18.12.1 
 * [Postgresql](https://www.postgresql.org/download/) 15 + pgAdmin 4
 * [Vite](https://vitejs.dev)
+
+### Installation des dépendences ###
+Clonnez le projet avec : 
+`git clone https://github.com/ZaPuncakeu/zoo-management.git`
