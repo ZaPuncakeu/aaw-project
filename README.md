@@ -7,7 +7,7 @@ Ce projet a été réalisé par :
 * MAHMAT SEID Ahmat
 * ADNANE Laanani
 
-Ce site a été créé avec les technologies suivantes : 
+Technologies utilisés :
 * ReactJS v18.12 + Vite 
 * Redux
 * Sass
