@@ -1,3 +1,5 @@
+const { populate_animals, populate_species } = require('./populate_db.cjs');
+
 const fs = require('fs');
 const { Client } = require('pg');
 
@@ -41,6 +43,9 @@ function init_tables()
         const tables = fs.readFileSync(`${__dirname}/setup_tables.sql`).toString();
         const res = await client.query(tables);
         console.log('Tables created');
+        await populate_species(client);
+        await populate_animals(client);
+        console.log('Tables populated');
         client.end();
         resolve(true);
     });

@@ -11,7 +11,7 @@ export default function Footer()
                     <br/>
                     Anis ROUANE - Ahlam BENDAHOU 
                     <br/> 
-                    Adnane - Seid 
+                    Adnane LAANANI - Ahmat MAHMAT SEID 
                 </p>
             </div>
             <div><img src='/images/logo-white.png'/></div>
