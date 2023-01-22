@@ -9,3 +9,4 @@ Ce site a été créé avec les technologies suivantes :
 * JWT
 * Postgresql 15
 
+##Configuration
