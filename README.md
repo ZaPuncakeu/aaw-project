@@ -20,7 +20,7 @@ Afin de lancer le projet sans problème il faut d'abord avoir :
 Clonnez le projet avec : `git clone https://github.com/ZaPuncakeu/zoo-management.git` \
 Puis déplacez vous dans à l'intérieur du projet : `cd zoo-management` \
 Enfin installez les dépendances : `yarn install`\
-Configurez le fichier `.env` avec les informations necessaires (NE CHANGEZ PAS LA VALEUR `PORT`
+Configurez le fichier `.env` avec les informations necessaires (**NE CHANGEZ PAS LA VALEUR `PORT`**)
 
 ### Lancement du projet ###
 Pour lancer le projet (client + serveur) 2 commandes sont disponibles :
