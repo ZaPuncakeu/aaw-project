@@ -68,7 +68,8 @@ const login = (db, data) => {
 
             if(await bcryptjs.compare(data['password'], password))
             {
-                const token = jwt.sign({id, type}, secret);
+                // La durée du token est de 1h
+                const token = jwt.sign({id, type}, secret, { expiresIn: 60 * 60 });
                 await add_token(db, token);
                 return resolve({token, type});
             }
@@ -172,6 +173,9 @@ const get_user_by_token = (db, token) => {
             }
 
             const t = jwt.verify(token, secret);
+            if (Date.now() >= t.exp * 1000) {
+                reject('expired');
+            }
             return resolve({user: t.id, type: t.type});
         }catch(error) {
             console.log(error);
