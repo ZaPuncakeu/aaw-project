@@ -5,7 +5,7 @@ Ce projet a été réalisé par :
 * ROUANE Anis
 * BENDAHOU Ahlam
 * MAHMAT SEID Ahmat
-* ADNANE Laanani
+* LAANANI Adnane
 
 Technologies utilisés :
 * ReactJS v18.12 + Vite 
